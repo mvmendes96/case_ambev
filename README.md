@@ -8,7 +8,6 @@ O projeto utiliza **Infraestrutura como Código (IaC)** com **Terraform** para p
 
 ## 🏗️ Arquitetura Geral
 
-![Arquitetura GCP](https://upload.wikimedia.org/wikipedia/commons/5/5f/Google_Cloud_Platform_logo.svg)
 
 ```text
 [Terraform]
