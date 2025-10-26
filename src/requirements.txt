@@ -1,0 +1,7 @@
+google-cloud-storage==2.13.0
+google-cloud-bigquery==3.12.0
+pandas==1.5.3
+numpy==1.24.3
+gcsfs==2023.6.0
+db-dtypes==1.2.0
+pyarrow==12.0.1
