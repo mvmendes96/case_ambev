@@ -156,9 +156,9 @@ _Data Engineer Manager – Ambev (Projeto Educacional)_
 
 [Linkedin](https://www.linkedin.com/in/marcus-mendes-328542146/)
 
-[Apresentação](https://docs.google.com/presentation/d/1p1ISb4vnGBLcbU-lpSdGDN-VSlXVLQKHwU9vCY1_KWg/edit?slide=id.g39d1e8344bc_0_38#slide=id.g39d1e8344bc_0_38)
+[Apresentação AMBEV](https://docs.google.com/presentation/d/1p1ISb4vnGBLcbU-lpSdGDN-VSlXVLQKHwU9vCY1_KWg/edit?slide=id.g39d1e8344bc_0_38#slide=id.g39d1e8344bc_0_38)
 
-[Looker](https://lookerstudio.google.com/u/0/reporting/4de5eb2f-bc81-42d1-8223-eb70cb1b6f3e/page/3v5cF)
+[Looker AMBEV](https://lookerstudio.google.com/u/0/reporting/4de5eb2f-bc81-42d1-8223-eb70cb1b6f3e/page/3v5cF)
 
 📧 mvmendes96@gmail.com  
 📍 Curitiba – PR, Brasil  
