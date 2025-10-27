@@ -1,0 +1,47 @@
+dataset: abi_silver
+description: Camada de modelagem dimensional e normalização dos dados de vendas e canais.
+tables:
+  - name: dim_brand
+    description: Dimensão de marcas com identificador único e descrição da marca.
+    columns:
+      brand_id: Identificador único gerado via hash (MD5).
+      brand_name: Nome da marca.
+      created_at: Timestamp de criação do registro.
+
+  - name: dim_distributor
+    description: Dimensão de distribuidores.
+    columns:
+      distributor_id: Identificador único gerado via hash.
+      distributor_name: Nome do distribuidor.
+
+  - name: dim_region
+    description: Dimensão geográfica com regiões de atuação.
+    columns:
+      region_id: Identificador único gerado via hash.
+      region_name: Nome da região.
+
+  - name: dim_channel
+    description: Dimensão dos canais de venda.
+    columns:
+      channel_id: Identificador único gerado via hash.
+      channel_group: Categoria de canal (varejo, atacado, etc.).
+
+  - name: dim_date
+    description: Dimensão de tempo com granularidade diária.
+    columns:
+      date_id: Identificador único (YYYYMMDD).
+      year: Ano.
+      month: Mês.
+      day: Dia.
+
+  - name: fact_sales
+    description: Fato principal de vendas.
+    columns:
+      sale_id: Identificador único de venda.
+      brand_id: Chave estrangeira para dim_brand.
+      distributor_id: Chave estrangeira para dim_distributor.
+      region_id: Chave estrangeira para dim_region.
+      channel_id: Chave estrangeira para dim_channel.
+      date_id: Chave estrangeira para dim_date.
+      usd_volume: Volume de vendas em USD.
+      loaded_at: Timestamp de carga.

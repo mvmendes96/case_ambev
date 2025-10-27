@@ -8,13 +8,14 @@ O projeto utiliza **Infraestrutura como Código (IaC)** com **Terraform** para p
 
 ## 🏗️ Arquitetura Geral
 
+![Arquitetura GCP]
 
 ```text
 [Terraform]
    ↓ provisiona
 [Cloud Storage] → [Cloud Run Jobs] → [BigQuery] → [Looker Studio]
                        ↑
-     (Dockerfiles Bronze/Silver/Gold + Python ETLs)
+     (Dockerfiles Bronze/Silver/Gold + Python ETLs + Catálogos YAML)
 ```
 
 ### 🔹 Camadas de Dados
@@ -40,6 +41,8 @@ infra/
 │   ├── bronze.py
 │   ├── silver.py
 │   ├── gold.py
+│   ├── catalog_silver.yml
+│   ├── catalog_gold.yml
 │   └── requirements.txt
 ├── datasets/
 │   ├── abi_bus_case1_beverage_channel_group_20210726.csv
@@ -57,6 +60,19 @@ infra/
     ├── .terraform.lock.hcl
     └── .terraform/
 ```
+
+---
+
+## 📚 Catálogo de Dados
+
+Os catálogos YAML descrevem de forma padronizada as **estruturas e definições das tabelas** nas camadas Silver e Gold.
+
+| Arquivo | Descrição |
+|----------|------------|
+| `catalog_silver.yml` | Define dimensões e fatos da camada Silver, incluindo chaves e relacionamentos. |
+| `catalog_gold.yml` | Lista as tabelas analíticas e KPIs da camada Gold, utilizadas no Looker Studio. |
+
+Esses arquivos servem como **documentação técnica e de negócio**, permitindo integração com ferramentas de governança de dados (como Data Catalog, Alation, Collibra, etc).
 
 ---
 
@@ -81,30 +97,7 @@ Cada camada do pipeline possui um **Dockerfile** e um script dedicado:
 | Silver | `Dockerfile.silver` | `silver.py` | Dados limpos e enriquecidos |
 | Gold | `Dockerfile.gold` | `gold.py` | KPIs e métricas de negócio |
 
-A execução é orquestrada via **Cloud Run Jobs**, conforme definido em `cloudrun.tf`.
-
----
-
-## 📊 Visualização e Consumo
-Os datasets Gold são consumidos diretamente no **Looker Studio**, permitindo análises e dashboards sobre:
-- Vendas por marca e canal  
-- Market share por região  
-- Crescimento mensal e sazonalidade  
-
----
-
-## 🧠 Tecnologias Utilizadas
-
-| Categoria | Ferramenta |
-|------------|-------------|
-| Infraestrutura | Terraform |
-| Cloud Platform | Google Cloud Platform (GCP) |
-| Processamento | Cloud Run Jobs |
-| Armazenamento | Cloud Storage |
-| Data Warehouse | BigQuery |
-| Visualização | Looker Studio |
-| Linguagem | Python 3 |
-| Dependências | Pandas, Google Cloud SDK |
+Os **catálogos YAML** são armazenados na mesma pasta (`src/`) para versionamento junto aos scripts Python e garantir consistência entre código e documentação.
 
 ---
 
@@ -132,8 +125,6 @@ gsutil cp abi_bus_case1_beverage_channel_group_20210726.csv gs://ambev-beverage-
 gsutil cp abi_bus_case1_beverage_sales_20210726.csv gs://ambev-beverage-mvp/raw/
 ```
 
-Esses arquivos serão utilizados pela camada **Bronze** como ponto de partida para o pipeline.
-
 ### 4. Build e push das imagens Docker
 ```bash
 gcloud builds submit --tag gcr.io/ambev-data/etl-bronze .
@@ -155,6 +146,7 @@ gcloud run jobs execute etl-gold
 - Camada de **Data Quality** (Great Expectations / dbt tests).  
 - Deploy automatizado via **GitHub Actions**.  
 - Versionamento de dados com **BigQuery Time Travel**.  
+- Integração dos catálogos YAML com o **GCP Data Catalog**.
 
 ---
 

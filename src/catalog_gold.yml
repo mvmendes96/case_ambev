@@ -1,0 +1,23 @@
+dataset: abi_gold
+description: Camada de agregações analíticas e KPIs de vendas e performance.
+tables:
+  - name: sales_top3_tradegroups_by_region
+    description: Top 3 grupos de trade por região com base no volume de vendas.
+
+  - name: sales_by_brand_month
+    description: Evolução mensal de vendas por marca.
+
+  - name: lowest_brand_by_region
+    description: Marcas com menor desempenho por região.
+
+  - name: sales_market_share_by_region
+    description: Participação de mercado por região e marca.
+
+  - name: sales_growth_monthly_by_brand
+    description: Crescimento mensal das vendas por marca.
+
+  - name: sales_channel_mix_over_time
+    description: Distribuição de vendas por canal ao longo do tempo.
+
+  - name: distributor_portfolio_diversity
+    description: Diversidade do portfólio de produtos por distribuidor.
